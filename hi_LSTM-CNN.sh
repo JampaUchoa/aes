@@ -20,7 +20,7 @@ embed_type=$4
 
 echo $embed_type
 
-datadir=../baselines/nea/data/fold_${fold_id}
+datadir=./data
 trainfile=$datadir/train.tsv
 devfile=$datadir/dev.tsv
 testfile=$datadir/test.tsv
@@ -35,7 +35,7 @@ then
 	embeddingfile=$embed_dir/data_dim${embed_dim}.vec
 elif [ $embed_type = "glove" ]
 then
-	embed_dir=../data/embedding/glove.6B
+	embed_dir=./embeds
 	embeddingfile=$embed_dir/glove.6B.${embed_dim}d.txt.gz
 fi
 
@@ -45,7 +45,7 @@ nb_epochs=50
 echo "Using embedding ${embeddingfile}"
 
  # THEANO_FLAGS='floatX=float32,device=cpu'
- python hi_LSTM-CNN.py --fine_tune --embedding $embed_type --embedding_dict $embeddingfile --embedding_dim ${embed_dim} \
+ python2 hi_LSTM-CNN.py --fine_tune --embedding $embed_type --embedding_dict $embeddingfile --embedding_dim ${embed_dim} \
  	--num_epochs $nb_epochs --batch_size 10 --nbfilters 100 --filter1_len 5 --filter2_len 3 --rnn_type LSTM --lstm_units 100\
  	--optimizer rmsprop --learning_rate 0.001 --dropout 0.5  \
 	--oov embedding  --checkpoint_path $checkdir \

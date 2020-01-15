@@ -1,0 +1,6 @@
+keras
+theano
+gensim
+nltk
+tensorflow
+sklearn

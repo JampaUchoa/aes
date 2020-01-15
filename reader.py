@@ -314,6 +314,7 @@ def read_dataset(file_path, prompt_id, vocab, to_lower, score_index=6, char_leve
             essay_id = int(tokens[0])
             essay_set = int(tokens[1])
             content = tokens[2].strip()
+            print(tokens)
             score = float(tokens[score_index])
             if essay_set == prompt_id or prompt_id <= 0:
                 # tokenize text into sentences
