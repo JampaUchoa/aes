@@ -39,7 +39,7 @@ then
 	embeddingfile=$embed_dir/glove.6B.${embed_dim}d.txt.gz
 fi
 
-nb_epochs=4
+nb_epochs=50
 # echo $embed_dim
 
 echo "Using embedding ${embeddingfile}"
