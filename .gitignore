@@ -1,3 +1,5 @@
 *.pyc
-*.tsv
-glove.*
+*.gz
+original.tsv
+checkpoint/*.*
+.DS_Store

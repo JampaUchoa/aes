@@ -8,7 +8,7 @@ import sys
 import warnings
 
 from keras import backend as K
-from keras import activations, initializers, regularizers
+from keras import activations, initializations, regularizers
 from keras.engine.topology import Layer, InputSpec
 # from keras.layers.wrappers import Wrapper, TimeDistributed
 # from keras.layers.core import Dense

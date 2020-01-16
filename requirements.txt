@@ -1,5 +1,5 @@
-keras
-theano
+keras==1.1.1
+theano==1.0.4
 gensim
 nltk
 tensorflow
