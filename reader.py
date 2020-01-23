@@ -23,16 +23,20 @@ MAX_SENTLEN = 50
 MAX_SENTNUM = 100
 
 asap_ranges = {
-    0: (0, 60),
-    1: (2, 12),
-    2: (1, 6),
-    3: (0, 3),
-    4: (0, 3),
-    5: (0, 4),
-    6: (0, 4),
-    7: (0, 30),
-    8: (0, 60)
+    1: (0, 10),
 }
+
+# asap_ranges = {
+#     0: (0, 60),
+#     1: (2, 12),
+#     2: (1, 6),
+#     3: (0, 3),
+#     4: (0, 3),
+#     5: (0, 4),
+#     6: (0, 4),
+#     7: (0, 30),
+#     8: (0, 60)
+# }
 
 
 def get_ref_dtype():
@@ -107,10 +111,10 @@ def create_vocab(file_path, prompt_id, vocab_size, tokenize_text, to_lower):
         input_file.next()
         for line in input_file:
             tokens = line.strip().split('\t')
-            essay_id = int(tokens[0])
-            essay_set = int(tokens[1])
-            content = tokens[2].strip()
-            score = float(tokens[6])
+            #essay_id = int(tokens[0])
+            essay_set = 1# int(tokens[1])
+            content = tokens[0].strip()
+            score = float(tokens[1])
             if essay_set == prompt_id or prompt_id <= 0:
                 if tokenize_text:
                     content = text_tokenizer(content, True, True, True)
@@ -152,10 +156,10 @@ def create_char_vocab(file_path, prompt_id, tokenize_text, to_lower):
         input_file.next()
         for line in input_file:
             tokens = line.strip().split('\t')
-            essay_id = int(tokens[0])
-            essay_set = int(tokens[1])
-            content = tokens[2].strip()
-            score = float(tokens[6])
+            #essay_id = int(tokens[0])
+            essay_set = 1#int(tokens[1])
+            content = tokens[0].strip()
+            score = float(tokens[1])
             if essay_set == prompt_id or prompt_id <= 0:
                 if tokenize_text:
                     content = text_tokenizer(content, True, True, True)
@@ -300,7 +304,7 @@ def shorten_sentence(sent, max_sentlen):
     return new_tokens
 
 
-def read_dataset(file_path, prompt_id, vocab, to_lower, score_index=6, char_level=False):
+def read_dataset(file_path, prompt_id, vocab, to_lower, score_index=3, char_level=False):
     logger.info('Reading dataset from: ' + file_path)
 
     data_x, data_y, prompt_ids = [], [], []
@@ -311,11 +315,11 @@ def read_dataset(file_path, prompt_id, vocab, to_lower, score_index=6, char_leve
         input_file.next()
         for line in input_file:
             tokens = line.strip().split('\t')
-            essay_id = int(tokens[0])
-            essay_set = int(tokens[1])
-            content = tokens[2].strip()
+            #essay_id = int(tokens[0])
+            essay_set = 1# int(tokens[1])
             print(tokens)
-            score = float(tokens[score_index])
+            content = tokens[0].strip()
+            score = float(tokens[1])
             if essay_set == prompt_id or prompt_id <= 0:
                 # tokenize text into sentences
                 sent_tokens = text_tokenizer(content, replace_url_flag=True, tokenize_sent_flag=True)
@@ -400,7 +404,7 @@ def read_char_dataset(file_path, prompt_id, vocab, char_vocab, to_lower, score_i
         input_file.next()
         for line in input_file:
             tokens = line.strip().split('\t')
-            essay_id = int(tokens[0])
+            #essay_id = int(tokens[0])
             essay_set = int(tokens[1])
             content = tokens[2].strip()
             score = float(tokens[score_index])

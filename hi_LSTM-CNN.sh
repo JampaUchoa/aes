@@ -7,16 +7,17 @@
 # Script to train neural model on automatic text scoring
 checkdir=./checkpoint
 
-if [ "$#" -ne 4 ]; then
-  echo "Usage: sh $0 embed_dim prompt_id fold_id embed_type"
-  exit 1
-fi
+#if [ "$#" -ne 4 ]; then
+#  echo "Usage: sh $0 embed_dim prompt_id embed_type"
+#  exit 1
+#fi
 
+# Use theano by default
+export KERAS_BACKEND=theano
 
-embed_dim=$1
-prompt_id=$2
-fold_id=$3
-embed_type=$4
+embed_dim=300 #$1
+prompt_id=1 #$2
+embed_type=glove #$4
 
 echo $embed_type
 
@@ -36,7 +37,8 @@ then
 elif [ $embed_type = "glove" ]
 then
 	embed_dir=./embeds
-	embeddingfile=$embed_dir/glove.6B.${embed_dim}d.txt.gz
+	#embeddingfile=$embed_dir/glove.6B.${embed_dim}d.txt.gz
+	embeddingfile=$embed_dir/glove_s${embed_dim}.txt.gz
 fi
 
 nb_epochs=50

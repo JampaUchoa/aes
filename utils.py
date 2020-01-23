@@ -127,6 +127,8 @@ def load_word_embedding_dict(embedding, embedding_path, word_alphabet, logger, e
                     continue
 
                 tokens = line.split()
+                # print(len(tokens))
+                # print((embedd_dim))
                 if embedd_dim < 0:
                     embedd_dim = len(tokens) - 1
                 else:
